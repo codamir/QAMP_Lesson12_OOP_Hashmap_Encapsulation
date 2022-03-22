@@ -6,62 +6,38 @@ import java.util.Collections;
 import java.util.Scanner;
 
 public class Numbers {
-    ArrayList<Integer> numbersList = new ArrayList<>();
-    char choice;
-    boolean isPrime=true;
-
-    public Numbers (){
-        this.numbersList=numbersList;
-        this.choice=choice;
-        this.isPrime=isPrime;
-    }
+    ArrayList<Integer> numbersList;
 
 
-    public ArrayList addNumbersToList(char inputChoice) {
-        Scanner reader = new Scanner(System.in);
-        Integer addNumber = 0;
-        if (inputChoice == 'y') {
-            do {
-                System.out.println("Type any number:");
-                addNumber = reader.nextInt();
-                this.numbersList.add(addNumber);
-                System.out.println("Add another number? y/n");
-                this.choice = reader.next().toLowerCase().charAt(0);
-            } while (this.choice == 'y');
-        }else System.out.println("Ok. Thank you.");
-        return this.numbersList;
-    }
-
-    public void printList (){
-        System.out.println(this.numbersList);
+    public Numbers (ArrayList<Integer> numberslist) {
+        this.numbersList = numberslist;
     }
 
     public int sumOfNumbersInList(){
         int count = 0;
         int sum = 0;
-        while (this.numbersList.size() > count) {
-            sum += this.numbersList.get(count);
-            count++;
+
+        for (int number : this.numbersList) {
+            sum += number;
         }
         return sum;
     }
 
-    public int maxNumberInList (){
+    public int maxNumberInList () {
         return Collections.max(this.numbersList);
     }
 
-    public int minNumberInList(){
+    public int minNumberInList() {
         return Collections.min(this.numbersList);
     }
 
-    public Boolean isPrimeNumber(){
+    public Boolean isPrimeNumber() {
         ArrayList<Boolean> status = new ArrayList<>();
         int numberCheck;
-        BigInteger number = null;
+        BigInteger number;
 
-        for (int i=0;i<this.numbersList.size();i++) {
-
-            numberCheck = this.numbersList.get(i);
+        for (Integer integer : this.numbersList) {
+            numberCheck = integer;
             number = BigInteger.valueOf(numberCheck);
 
             Boolean numberIsPrime = number.isProbablePrime(100);
@@ -70,20 +46,21 @@ public class Numbers {
             }
         }
 
-        if (status.size()!=0){
+        if (status.size() != 0) {
             return true;
-        }else return false;
+        } else {
+            return false;
+        }
     }
 
     public void displayOnlyPrimeNumbers(){
         int numberToCheck;
-        int count=0;
-        BigInteger number= BigInteger.valueOf(0);
+        int count = 0;
+        BigInteger number;
         ArrayList<BigInteger> primeNumbers = new ArrayList<>();
 
-        for (int i=0;i<this.numbersList.size();i++){
-
-            numberToCheck = this.numbersList.get(i);
+        for (Integer integer : this.numbersList) {
+            numberToCheck = integer;
             number = BigInteger.valueOf(numberToCheck);
 
             Boolean numberIsPrime = number.isProbablePrime(100);
@@ -91,10 +68,8 @@ public class Numbers {
                 primeNumbers.add(number);
             }
         }
-
         System.out.println(primeNumbers);
     }
-
 }
 
 

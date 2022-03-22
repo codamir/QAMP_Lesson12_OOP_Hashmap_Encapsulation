@@ -7,16 +7,15 @@ public class Main_Student {
     public static void main(String[] args) {
         Scanner reader = new Scanner(System.in);
 
-        Student myUniversity = new Student();
+        Student myUniversity = new Student(new HashMap<>());
 
         char answer = 0;
         int choice = 0;
         int ordinalNumber = 0;
 
-
-        System.out.println("-----------------------------------------"+
-                            "\nType the number what would you like to do: " +
-                            "\n-----------------------------------------");
+        System.out.println("-----------------------------------------" +
+                "\nType the number what would you like to do: " +
+                "\n-----------------------------------------");
 
         do {
             String[] menu = {
@@ -30,7 +29,7 @@ public class Main_Student {
 
             menuFromArray(menu);
 
-            choice=reader.nextInt();
+            choice = reader.nextInt();
 
             if (choice == 1) {
                 myUniversity.addAnotherStudent();
@@ -45,24 +44,25 @@ public class Main_Student {
                 myUniversity.changeStudent(ordinalNumber);
             } else if (choice == 5) {
                 System.out.println("Type the ordinal number of the student you want to delete.");
+                myUniversity.listAllStudents();
                 ordinalNumber = reader.nextInt();
                 myUniversity.removeStudent(ordinalNumber);
+            } else {
+                System.out.println("Incorrect option chosen, you must choose from 1 to 5.");
             }
-
             System.out.println("Do you want to do something else from the menu? y/n");
             answer = reader.next().toLowerCase().charAt(0);
-        }while (answer=='y');
+        } while (answer == 'y');
 
     }
 
-    public static String[] menuFromArray(String[] array){
+    public static String[] menuFromArray(String[] array) {
         int counter = 0;
         for (int i = 0; i < array.length; i++) {
             System.out.println(++counter + " - " + array[i]);
         }
         return array;
     }
-
 }
 
 

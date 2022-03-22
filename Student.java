@@ -4,74 +4,53 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class Student {
-    private HashMap<Integer,String>studentInfo = new HashMap<>();
-    private String name;
-    private int number;
-    private int studentNumber;
-    private String newValue;
-    private int ordinalNumberCheck;
+    private HashMap<Integer, String> studentInfo;
 
-    public Student(){
-        this.studentInfo=studentInfo;
-        this.name = name;
-        this.number=number;
-        this.studentNumber=studentNumber;
-        this.newValue=newValue;
-        this.ordinalNumberCheck=ordinalNumberCheck;
+    public Student(HashMap<Integer, String> studentInfo) {
+        this.studentInfo = studentInfo;
     }
 
-
-    public void addAnotherStudent(){
+    public void addAnotherStudent() {
         Scanner reader = new Scanner(System.in);
 
-        int count=0;
-        char answer=0;
+        int count = 0;
+        char answer = 0;
 
         do {
             addStudents(++count);
             System.out.println("Do you want to add another student? y/n");
             answer = reader.next().toLowerCase().charAt(0);
-        }while (answer == 'y');
+        } while (answer == 'y');
     }
 
-    private void addStudents(int studentNumber){
-        int number = 0;
-        this.studentNumber=studentNumber;
+    private void addStudents(int studentNumber) {
         Scanner reader = new Scanner(System.in);
+
         System.out.println("Please type the student name and surname:");
-        this.name = reader.nextLine();
-        this.studentInfo.put(this.studentNumber,this.name);
-        }
+        String name = reader.nextLine();
+        this.studentInfo.put(studentNumber, name);
+    }
 
-    public void listAllStudents(){
+    public void listAllStudents() {
         System.out.println("Student list:");
-        for(HashMap.Entry singleStudent : studentInfo.entrySet()){
-            System.out.println(singleStudent.getKey() + ". " +singleStudent.getValue());
+        for (HashMap.Entry singleStudent : studentInfo.entrySet()) {
+            System.out.println(singleStudent.getKey() + ". " + singleStudent.getValue());
         }
     }
 
-    public void listAllStudentNames(){
-        System.out.println("Students names are: ");
-        for(HashMap.Entry singleStudent : studentInfo.entrySet()){
-            System.out.println(singleStudent.getValue());
-        }
+    public void removeStudent(int ordinalNumber) {
+        this.studentInfo.remove(ordinalNumber);
     }
 
-    public void removeStudent(int number){
-        this.studentNumber=number;
-        this.studentInfo.remove(this.studentNumber);
-    }
-
-    public void changeStudent (int ordinalNumber){
+    public void changeStudent(int ordinalNumber) {
         Scanner reader = new Scanner(System.in);
 
         System.out.println("Please type the changes for the student you chose:");
-        this.newValue = reader.nextLine();
-        studentInfo.replace(ordinalNumber,this.newValue);
-        }
-        
+        String newValue = reader.nextLine();
+        studentInfo.replace(ordinalNumber, newValue);
     }
 
+}
 
 
 //2. Napravite klasu Student koja u konstruktoru prima HashMap<Integer, String> studentInfo

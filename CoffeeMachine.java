@@ -3,83 +3,95 @@ package Lesson_12;
 import java.util.Scanner;
 
 public class CoffeeMachine {
-    private String esspresso = "Esspresso";
-    private String macchiato = "Macchiato";
-    private String cappuccino = "Cappuccino";
-    private String milk = "Milk";
-    private String hotChocolate = "Hot Chocolate";
-    private String drinkChoice;
-    private int answer;
-    private char choice;
-    private String[] drinkList = {"Espresso", "Macchiato", "Cappuccino"};
+    private String esspresso;
+    private String macchiato;
+    private String cappuccino;
+    private String milk;
+    private String hotChocolate;
 
-    public CoffeeMachine(){
+    public CoffeeMachine(String esspresso, String macchiato, String cappuccino, String milk, String hotChocolate) {
         this.esspresso = esspresso;
         this.macchiato = macchiato;
         this.cappuccino = cappuccino;
         this.milk = milk;
         this.hotChocolate = hotChocolate;
-        this.drinkChoice = drinkChoice;
-        this.answer = answer;
-        this.drinkList=drinkList;
-        this.choice=choice;
     }
 
-    public void getDrink(){
-        System.out.println("Choose your drink");
+    private String [] drinkList(){
+        String[] drinkList = {this.esspresso,this.macchiato,this.cappuccino,this.milk,this.hotChocolate};
+        return drinkList;
+    }
+
+    public void getDrink() {
+        System.out.println("Choose your drink:");
         int n = 0;
-        for (String menu:this.drinkList){
-            System.out.println(++n+ " | " + menu);
+        String[] menu = drinkList();
+        for (int i=0; i< menu.length; i++) {
+            System.out.println(++n + " | " + menu[i]);
         }
         makeChoice();
     }
 
-    private void makeChoice(){
+    private void makeChoice() {
         Scanner reader = new Scanner(System.in);
-        this.answer = reader.nextInt();
+        int answer = reader.nextInt();
 
-        if (this.answer==1){
+        if (answer == 1) {
             addSugar();
             System.out.println("Your " + this.esspresso + " is now ready." +  "\n-------------------------");
-        }else if (this.answer==2){
+        }else if (answer == 2) {
             addSugar();
             System.out.println("Your " + this.macchiato + " is now ready." + "\n-------------------------");
-        }else if (this.answer==3){
+        }else if (answer == 3) {
             addSugar();
             System.out.println("Your " + this.cappuccino + " is now ready." + "\n-------------------------");
+        }else if (answer == 4) {
+            addSugar();
+            System.out.println("Your " + this.milk + " is now ready." + "\n-------------------------");
+        }else if (answer == 5) {
+            addSugar();
+            System.out.println("Your " + this.hotChocolate + " is now ready." + "\n-------------------------");
+        }else {
+            System.out.println("Incorrect option chosen. Please choose options from 1 to 5. Thank you.");
+            getDrink();
         }
         anotherDrink();
     }
 
-    private void anotherDrink (){
+    private void anotherDrink () {
         Scanner reader = new Scanner(System.in);
+        char choice;
 
         do{
             System.out.println("Do you want to make another drink? y/n");
-            this.choice = reader.next().toLowerCase().charAt(0);
-            if(this.choice=='y'){
+            choice = reader.next().toLowerCase().charAt(0);
+            if(choice == 'y') {
                 System.out.println("Plase remove the cup, and choose another drink.");
                 getDrink();
-            }else System.out.println("Please remove the cup.");
+            } else {
+                System.out.println("Please remove the cup.");
+            }
             break;
 
-        }while(this.choice=='y');
+        } while (choice == 'y');
     }
 
-    private void addSugar(){
+    private void addSugar() {
         Scanner reader = new Scanner(System.in);
 
-        System.out.println("Do you want to add sugar?");
+        System.out.println("Do you want to add sugar? y/n");
         char yesNo = reader.next().toLowerCase().charAt(0);
 
-        if (yesNo=='y'){
-            System.out.println("Sugar added to your drink"+ "\n-------------------------");
-        }else System.out.println("Your drink will be made without sugar."+"\n-------------------------");
-
+        if (yesNo == 'y'){
+            System.out.println("Sugar added to your drink."+ "\n-------------------------");
+        } else if (yesNo == 'n'){
+            System.out.println("Your drink will be made without sugar."+"\n-------------------------");
+        } else {
+            System.out.println("Incorrect letter entered. You need to type letter 'y' or 'n'.");
+            addSugar();
+        }
     }
-
 }
-
 
 //Enkapsulacija:
 //        3. Napraviti CoffeeMachine klasu primjenjujuci koncept enkapsulacije.
